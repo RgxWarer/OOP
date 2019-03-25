@@ -39,7 +39,8 @@ class List:
 
         for i in range(self.length):
             for j in range(1, self.length - i - 1):
-                if self.GetByID(i). > self.GetByID(j):
+                if self.GetByID(i).how_year() > self.GetByID(j).how_year():
+
 
 
     def clear(self):
