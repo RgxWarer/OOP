@@ -19,7 +19,7 @@ class List:
                     current = current.next
                 else:
                     return "Out of range"
-            return current.value
+            return current
         return 'Empty List'
 
     def Add(self, x):
@@ -35,13 +35,28 @@ class List:
             new_link.prev = last
             new_link.next = self.head
 
+    def Compare(self, Arg1, Arg2):
+        if Arg1.how_year() > Arg2.how_year():
+            return 1
+        else:
+            return 0
+
     def Sort(self):
+        for i in range(self.length-1):
+            for j in range(0, self.length-i-1):
+                tmp_el = self.GetByID(j)
+                tmp_min = None
+                if self.Compare(tmp_el.value, self.GetByID(j+1).value):
+                    tmp_min = self.GetByID(j+1)
+                    tmp_el.prev.next = tmp_min
+                    tmp_min.next.prev = tmp_el
+                    tmp_el.next = tmp_min.next
+                    tmp_min.prev = tmp_el.prev
+                    tmp_el.prev = tmp_min
+                    tmp_min.next = tmp_el
 
-        for i in range(self.length):
-            for j in range(1, self.length - i - 1):
-                if self.GetByID(i).how_year() > self.GetByID(j).how_year():
-
-
+                if tmp_el == self.head:
+                    self.head = tmp_min
 
     def clear(self):
         self.__init__()

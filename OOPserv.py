@@ -28,10 +28,11 @@ class Container:
 
         output_file = open(file_name, 'w')
         if self.lang_list.length > 0:
+            self.lang_list.Sort()
             output_file.write("Number of elements = " + str(self.lang_list.length) + " \n")
 
             for i in range(self.lang_list.length):
-                lang = self.lang_list.GetByID(i)
+                lang = self.lang_list.GetByID(i).value
                 output_file.write(str(i + 1))
                 lang.output_lang(output_file)
             return 1
