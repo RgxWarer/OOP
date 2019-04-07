@@ -94,7 +94,6 @@ class Container:
         output_file.write("\nList empty. Number of elements = " + str(self.length) + " \n")
 
 
-
 class Language:
     lang_list = Container()
 
@@ -112,6 +111,9 @@ class Language:
         elif int(lang_type) == 2:  # процедурный
             tmp_Proc = ProcLang()
             tmp_Proc.Input_Langs(lang_params, lang_list)
+        elif int(lang_type) == 3:  # функциональный
+            tmp_Func = FuncLang()
+            tmp_Func.Input_Langs(lang_params, lang_list)
         else:
             print("Verify that the input is correct.")
 
@@ -147,5 +149,19 @@ class ProcLang(Language):
         lang_list.Add(self)
 
     def Output_Lang(self, output_stream):
-        output_stream.write(": Procedure language" + "\n" + "abstract = " + self.abstract + ", year = " +
-                            self.year.strip() + ", how old: " + str(self.How_Year()) + "\n")
+        output_stream.write(": Procedure language" + "\n" +
+                            "abstract = " + self.abstract + ", year = " + self.year + "\n")
+
+
+class FuncLang(Language):
+    def __init__(self):
+        super().__init__()
+
+    def Input_Langs(self, line, lang_list):
+        self.type, self.lazy, self.year = line
+        lang_list.Add(self)
+
+    def Output_Lang(self, output_stream):
+        output_stream.write(": Functional language" + "\n" +
+                            "typification = " + self.type + ", lazy computing support = " + self.lazy +
+                            ", year = " + self.year + "\n")

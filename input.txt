@@ -1,8 +1,6 @@
 1
-multiply 1992
-1
-no 2000
+multiply 1998
 2
-no 1993
-1
-single 1994
+no 1997
+3
+strong no 1990
