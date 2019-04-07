@@ -4,3 +4,7 @@ multiply 12341 1998
 no 12010 1997
 3
 strong no 120123 1999
+3
+strong no 120123 2000
+2
+yes 555 1990
