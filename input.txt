@@ -1,6 +1,6 @@
 1
-multiply 1998
+multiply 12341 1998
 2
-no 1997
+no 12010 1997
 3
-strong no 1990
+strong no 120123 1999

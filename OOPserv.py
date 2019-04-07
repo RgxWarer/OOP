@@ -53,7 +53,7 @@ class Container:
 
         lang = Language()
         for line in file:
-            lang.Input_Lang(self, line, file.readline().split(" "))
+            lang.Input_Lang(self, line, file.readline().strip().split(" "))
 
     def Output(self, file_name):
 
@@ -87,7 +87,6 @@ class Container:
                     if tmp_el == self.head:
                         self.head = tmp_min
 
-
     def Clear(self, file_name):
         self.__init__()
         output_file = open(file_name, 'a')
@@ -99,6 +98,7 @@ class Language:
 
     def __init__(self):
         self.year = 0  # общее поле - год разработки
+        self.mentions = 0  # общее поле - упоминания
 
     @abc.abstractmethod  # определим метод позже
     def Output_Lang(self, output_stream):
@@ -132,25 +132,26 @@ class OOPlang(Language):
         super().__init__()
 
     def Input_Langs(self, line, lang_list):
-        self.inher, self.year = line
+        self.inher, self.mentions, self.year = line
         lang_list.Add(self)
 
     def Output_Lang(self, output_stream):  # Вывод значений полей
-        output_stream.write(": OOP language" + "\n" + "inheritance = " + self.inher + ", year = " +
-                            self.year.strip() + ", how old: " + str(self.How_Year()) + "\n")
+        output_stream.write(": OOP language" + "\n" + "inheritance = " + self.inher + ", number of mentions = " +
+                            self.mentions + ", year = " + self.year + ", how old = " + str(self.How_Year()) + "\n")
 
 
 class ProcLang(Language):
     def __init__(self):
         super().__init__()
 
+
     def Input_Langs(self, line, lang_list):
-        self.abstract, self.year = line
+        self.abstract, self.mentions, self.year = line
         lang_list.Add(self)
 
     def Output_Lang(self, output_stream):
-        output_stream.write(": Procedure language" + "\n" + "abstract = " + self.abstract + ", year = " +
-                            self.year.strip() + ", how old: " + str(self.How_Year()) + "\n")
+        output_stream.write(": Procedure language" + "\n" + "abstract = " + self.abstract + ", number of mentions = " +
+                            self.mentions + ", year = " + self.year + ", how old = " + str(self.How_Year()) + "\n")
 
 
 class FuncLang(Language):
@@ -158,10 +159,11 @@ class FuncLang(Language):
         super().__init__()
 
     def Input_Langs(self, line, lang_list):
-        self.type, self.lazy, self.year = line
+        self.type, self.lazy, self.mentions, self.year = line
         lang_list.Add(self)
 
     def Output_Lang(self, output_stream):
         output_stream.write(": Functional language" + "\n" + "typification = " + self.type +
-                            ", lazy computing support = " + self.lazy + ", year = " + self.year.strip() +
-                            ", how old: " + str(self.How_Year()) + "\n")
+                            ", lazy computing support = " + self.lazy + ", number of mentions = " + self.mentions
+                            + ", year = " + self.year + ", how old = " + str(self.How_Year()) + "\n")
+
