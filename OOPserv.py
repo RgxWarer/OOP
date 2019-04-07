@@ -88,7 +88,6 @@ class Container:
                         self.head = tmp_min
 
 
-
     def Clear(self, file_name):
         self.__init__()
         output_file = open(file_name, 'a')
