@@ -1,0 +1,9 @@
+Number of elements = 3 
+1: OOP language
+inheritance = multiply, year = 1998, how old: 21
+2: Procedure language
+abstract = no, year = 1997, how old: 22
+3: Functional language
+typification = strong, lazy computing support = no, year = 1990, how old: 29
+
+List empty. Number of elements = 0 

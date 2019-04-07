@@ -149,8 +149,8 @@ class ProcLang(Language):
         lang_list.Add(self)
 
     def Output_Lang(self, output_stream):
-        output_stream.write(": Procedure language" + "\n" +
-                            "abstract = " + self.abstract + ", year = " + self.year + "\n")
+        output_stream.write(": Procedure language" + "\n" + "abstract = " + self.abstract + ", year = " +
+                            self.year.strip() + ", how old: " + str(self.How_Year()) + "\n")
 
 
 class FuncLang(Language):
@@ -162,6 +162,6 @@ class FuncLang(Language):
         lang_list.Add(self)
 
     def Output_Lang(self, output_stream):
-        output_stream.write(": Functional language" + "\n" +
-                            "typification = " + self.type + ", lazy computing support = " + self.lazy +
-                            ", year = " + self.year + "\n")
+        output_stream.write(": Functional language" + "\n" + "typification = " + self.type +
+                            ", lazy computing support = " + self.lazy + ", year = " + self.year.strip() +
+                            ", how old: " + str(self.How_Year()) + "\n")
