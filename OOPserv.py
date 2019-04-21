@@ -53,13 +53,14 @@ class Container:
 
         lang = Language()
         for line in file:
-            lang.Input_Lang(self, line, file.readline().strip().split(" "))
+            if line:
+                lang.Input_Lang(self, line.strip(), file.readline().strip().split(" "))
 
     def Output(self, file_name):
 
-        output_file = open(file_name, 'w')
+        output_file = open(file_name, 'a')
         if self.length > 0:
-            output_file.write("Number of elements = " + str(self.length) + " \n")
+            output_file.write("\nNumber of elements = " + str(self.length) + " \n")
             current = self.head
             for i in range(self.length):
                 output_file.write(str(i + 1))
@@ -67,7 +68,22 @@ class Container:
                 current = current.next
             return 1
         else:
-            output_file.write("No elements! \n")
+            output_file.write("No elements! \n\n")
+            return 0
+
+    def OutputFilter(self, file_name):
+
+        output_file = open(file_name, 'a')
+        if self.length > 0:
+            output_file.write("\nNumber of elements = " + str(self.length) + " \n")
+            current = self.head
+            for i in range(self.length):
+                output_file.write(str(i + 1))
+                current.value.Output_Lang_Filter(output_file)
+                current = current.next
+            return 1
+        else:
+            output_file.write("No elements! \n\n")
             return 0
 
     def Sort(self):
@@ -99,19 +115,30 @@ class Language:
     def __init__(self):
         self.year = 0  # общее поле - год разработки
         self.mentions = 0  # общее поле - упоминания
+        self.OOP_txt = {0: "single",
+                        1: "multiply",
+                        2: "interface"}
+        self.bool_txt = {0: "no",
+                         1: "yes"}
+        self.FUNC_txt = {0: "strong",
+                         1: "dynamic"}
 
     @abc.abstractmethod  # определим метод позже
     def Output_Lang(self, output_stream):
         pass
 
+    def Output_Lang_Filter(self, output_stream):
+        output_stream.write(". \n\n")
+
+
     def Input_Lang(self, lang_list, lang_type, lang_params):
-        if int(lang_type) == 1:  # ООП
+        if lang_type == "1":  # ООП
             tmp_OOP = OOPlang()
             tmp_OOP.Input_Langs(lang_params, lang_list)
-        elif int(lang_type) == 2:  # процедурный
+        elif lang_type == "2":  # процедурный
             tmp_Proc = ProcLang()
             tmp_Proc.Input_Langs(lang_params, lang_list)
-        elif int(lang_type) == 3:  # функциональный
+        elif lang_type == "3":  # функциональный
             tmp_Func = FuncLang()
             tmp_Func.Input_Langs(lang_params, lang_list)
         else:
@@ -132,11 +159,22 @@ class OOPlang(Language):
         super().__init__()
 
     def Input_Langs(self, line, lang_list):
-        self.inher, self.mentions, self.year = line
-        lang_list.Add(self)
+        try:
+            self.inher, self.mentions, self.year = line
+            try:
+                temp1 = self.OOP_txt[int(self.inher)]
+                temp2 = int(self.mentions)
+                temp3 = int(self.year)
 
-    def Output_Lang(self, output_stream):  # Вывод значений полей
-        output_stream.write(": \n\n")
+                lang_list.Add(self)
+            except:
+                print("Verify that the all parameters is correct.")
+        except:
+            print("Verify that the number of parameters is correct.")
+
+    def Output_Lang(self, output_stream):
+        output_stream.write(". OOP language: " + "inheritance = " + self.OOP_txt[int(self.inher)] + ", number of mentions = " +
+                            self.mentions + ", year = " + self.year + ", how old = " + str(self.How_Year()) + "\n")
 
 
 class ProcLang(Language):
@@ -145,12 +183,25 @@ class ProcLang(Language):
 
 
     def Input_Langs(self, line, lang_list):
-        self.abstract, self.mentions, self.year = line
-        lang_list.Add(self)
+        try:
+            self.abstract, self.mentions, self.year = line
+            try:
+                temp1 = self.bool_txt[int(self.abstract)]
+                temp2 = int(self.mentions)
+                temp2 = int(self.year)
+                lang_list.Add(self)
+            except:
+                print("Verify that the all parameters is correct.")
+        except:
+            print("Verify that the number of parameters is correct.")
+
 
     def Output_Lang(self, output_stream):  # Вывод значений полей
-        output_stream.write(": Procedure language" + "\n" + "abstract = " + self.abstract + ", number of mentions = " +
+        output_stream.write(". Procedure language: " + "abstract = " + self.bool_txt[int(self.abstract)] + ", number of mentions = " +
                             self.mentions + ", year = " + self.year + ", how old = " + str(self.How_Year()) + "\n")
+
+    def Output_Lang_Filter(self, output_stream):  # Вывод значений полей
+        self.Output_Lang(output_stream)
 
 
 class FuncLang(Language):
@@ -158,9 +209,26 @@ class FuncLang(Language):
         super().__init__()
 
     def Input_Langs(self, line, lang_list):
-        self.type, self.lazy, self.mentions, self.year = line
-        lang_list.Add(self)
+        try:
+            self.type, self.lazy, self.mentions, self.year = line
+            try:
+                temp1 = self.FUNC_txt[int(self.type)]
+                temp2 = self.bool_txt[int(self.lazy)]
+                temp2 = int(self.mentions)
+                temp2 = int(self.year)
+                lang_list.Add(self)
+            except:
+                print("Verify that the all parameters is correct.")
+        except:
+            print("Verify that the number of parameters is correct.")
 
-    def Output_Lang(self, output_stream):  # Вывод значений полей
-        output_stream.write(": \n\n")
+    def Output_Lang(self, output_stream):
+        output_stream.write(". Functional language: " + "typification = " + self.FUNC_txt[int(self.type)] +
+                            ", lazy computing support = " + self.bool_txt[int(self.lazy)] + ", number of mentions = " + self.mentions
+                            + ", year = " + self.year + ", how old = " + str(self.How_Year()) + "\n")
+
+
+
+
+
 

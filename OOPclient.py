@@ -12,8 +12,11 @@ class Main:
 
         c = Container()
         if c.Input(input_name) != 0:
-            c.Sort()
+            open(output_name, 'w').close()
             if c.Output(output_name) != 0:
+                c.Sort()
+                c.Output(output_name)
+                c.OutputFilter(output_name)
                 c.Clear(output_name)
 
 
