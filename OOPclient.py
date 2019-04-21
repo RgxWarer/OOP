@@ -11,8 +11,8 @@ class Main:
         output_name = sys.argv[2]
 
         c = Container()
+        c.Clear_File(output_name)
         if c.Input(input_name) != 0:
-            open(output_name, 'w').close()
             if c.Output(output_name) != 0:
                 c.Sort()
                 c.Output(output_name)

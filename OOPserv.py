@@ -55,6 +55,7 @@ class Container:
         for line in file:
             if line:
                 lang.Input_Lang(self, line.strip(), file.readline().strip().split(" "))
+        file.close()
 
     def Output(self, file_name):
 
@@ -66,9 +67,11 @@ class Container:
                 output_file.write(str(i + 1))
                 current.value.Output_Lang(output_file)
                 current = current.next
+            output_file.close()
             return 1
         else:
             output_file.write("No elements! \n\n")
+            output_file.close()
             return 0
 
     def OutputFilter(self, file_name):
@@ -81,9 +84,11 @@ class Container:
                 output_file.write(str(i + 1))
                 current.value.Output_Lang_Filter(output_file)
                 current = current.next
+            output_file.close()
             return 1
         else:
             output_file.write("No elements! \n\n")
+            output_file.close()
             return 0
 
     def Sort(self):
@@ -107,6 +112,10 @@ class Container:
         self.__init__()
         output_file = open(file_name, 'a')
         output_file.write("\nList empty. Number of elements = " + str(self.length) + " \n")
+        output_file.close()
+
+    def Clear_File(self, file_name):
+        open(file_name, 'w').close()
 
 
 class Language:
@@ -158,6 +167,14 @@ class OOPlang(Language):
     def __init__(self):
         super().__init__()
 
+    def __eq__(self, other):
+        if isinstance(other, OOPlang):
+            return (self.inher == other.inher and
+                    self.mentions == other.mentions and
+                    self.year == other.year)
+        return NotImplemented
+
+
     def Input_Langs(self, line, lang_list):
         try:
             self.inher, self.mentions, self.year = line
@@ -181,6 +198,12 @@ class ProcLang(Language):
     def __init__(self):
         super().__init__()
 
+    def __eq__(self, other):
+        if isinstance(other, ProcLang):
+            return (self.abstract == other.abstract and
+                    self.mentions == other.mentions and
+                    self.year == other.year)
+        return NotImplemented
 
     def Input_Langs(self, line, lang_list):
         try:
@@ -207,6 +230,14 @@ class ProcLang(Language):
 class FuncLang(Language):
     def __init__(self):
         super().__init__()
+
+    def __eq__(self, other):
+        if isinstance(other, FuncLang):
+            return (self.type == other.type and
+                    self.lazy == other.lazy and
+                    self.mentions == other.mentions and
+                    self.year == other.year)
+        return NotImplemented
 
     def Input_Langs(self, line, lang_list):
         try:
