@@ -12,7 +12,7 @@ class Main:
 
         c = Container()
         if c.Input(input_name) != 0:
-            if c.Output(output_name) != 0:
+            if c.MultiOutput(output_name) != 0:
                 c.Clear(output_name)
 
 
