@@ -1,14 +1,117 @@
-Number of elements = 4 
-1: OOP language
+
+OOP and PROC
+: OOP language
 inheritance = multiply, year = 1998
 
-2: Procedure language
+: Procedure language
 abstract = no, year = 1997
 
-3: Functional language
+
+OOP and FUNC
+: OOP language
+inheritance = multiply, year = 1998
+
+: Functional language
 typification = strong, lazy computing support = no, year = 1990
 
-4: Functional language
-typification = false, lazy computing support = yes, year = 1999
+
+OOP and FUNC
+: OOP language
+inheritance = multiply, year = 1998
+
+: Functional language
+typification = false, lazy computing support = yes, year = 2002
+
+
+OOP and PROC
+: OOP language
+inheritance = multiply, year = 1998
+
+: Procedure language
+abstract = no, year = 2001
+
+
+OOP and OOP 
+: OOP language
+inheritance = multiply, year = 1998
+
+: OOP language
+inheritance = multiply, year = 2000
+
+Proc and FUNC
+: Procedure language
+abstract = no, year = 1997
+
+: Functional language
+typification = strong, lazy computing support = no, year = 1990
+
+
+Proc and FUNC
+: Procedure language
+abstract = no, year = 1997
+
+: Functional language
+typification = false, lazy computing support = yes, year = 2002
+
+
+Proc and Proc
+: Procedure language
+abstract = no, year = 1997
+
+: Procedure language
+abstract = no, year = 2001
+
+
+PROC and OOP
+: Procedure language
+abstract = no, year = 1997
+
+: OOP language
+inheritance = multiply, year = 2000
+
+FUNC and FUNC
+: Functional language
+typification = strong, lazy computing support = no, year = 1990
+
+: Functional language
+typification = false, lazy computing support = yes, year = 2002
+
+
+FUNC and PROC
+: Functional language
+typification = strong, lazy computing support = no, year = 1990
+
+: Procedure language
+abstract = no, year = 2001
+
+
+FUNC and OOP
+: Functional language
+typification = strong, lazy computing support = no, year = 1990
+
+: OOP language
+inheritance = multiply, year = 2000
+
+FUNC and PROC
+: Functional language
+typification = false, lazy computing support = yes, year = 2002
+
+: Procedure language
+abstract = no, year = 2001
+
+
+FUNC and OOP
+: Functional language
+typification = false, lazy computing support = yes, year = 2002
+
+: OOP language
+inheritance = multiply, year = 2000
+
+PROC and OOP
+: Procedure language
+abstract = no, year = 2001
+
+: OOP language
+inheritance = multiply, year = 2000
 
 List empty. Number of elements = 0 

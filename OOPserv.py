@@ -69,6 +69,22 @@ class Container:
             output_file.write("No elements! \n")
             return 0
 
+    def MultiOutput(self, file_name):
+
+        output_file = open(file_name, 'w')
+        if self.length > 0:
+            for i in range(self.length - 1):
+                for j in range(i + 1, self.length):
+                    obj1 = self.GetByID(i).value
+                    obj2 = self.GetByID(j).value
+                    obj1.MultiMethod(obj2, output_file)
+                    obj1.Output_Lang(output_file)
+                    obj2.Output_Lang(output_file)
+            return 1
+        else:
+            output_file.write("No elements! \n")
+            return 0
+
     def Clear(self, file_name):
         self.__init__()
         output_file = open(file_name, 'a')
@@ -83,6 +99,22 @@ class Language:
 
     @abc.abstractmethod  # определим метод позже
     def Output_Lang(self, output_stream):
+        pass
+
+    @abc.abstractmethod  # определим метод позже
+    def MultiMethod(self, obj2, output_stream):
+        pass
+
+    @abc.abstractmethod  # определим метод позже
+    def MMProc(self, output_stream):
+        pass
+
+    @abc.abstractmethod  # определим метод позже
+    def MMOop(self, output_stream):
+        pass
+
+    @abc.abstractmethod  # определим метод позже
+    def MMFunc(self, output_stream):
         pass
 
     def Input_Lang(self, lang_list, lang_type, lang_params):
@@ -111,6 +143,18 @@ class OOPlang(Language):
         output_stream.write(": OOP language" + "\n" +
                             "inheritance = " + self.inher + ", year = " + self.year + "\n")
 
+    def MultiMethod(self, obj2, output_stream):
+        obj2.MMOop(output_stream)
+
+    def MMOop(self, output_stream):
+        output_stream.write("\nOOP and OOP \n")
+
+    def MMProc(self, output_stream):
+        output_stream.write("\nPROC and OOP\n")
+
+    def MMFunc(self, output_stream):
+        output_stream.write("\nFUNC and OOP\n")
+
 
 class ProcLang(Language):
     def __init__(self):
@@ -123,6 +167,18 @@ class ProcLang(Language):
     def Output_Lang(self, output_stream):
         output_stream.write(": Procedure language" + "\n" +
                             "abstract = " + self.abstract + ", year = " + self.year + "\n")
+
+    def MultiMethod(self, obj2, output_stream):
+        obj2.MMProc(output_stream)
+
+    def MMProc(self, output_stream):
+        output_stream.write("\nProc and Proc\n")
+
+    def MMOop(self, output_stream):
+        output_stream.write("\nOOP and PROC\n")
+
+    def MMFunc(self, output_stream):
+        output_stream.write("\nFUNC and PROC\n")
 
 
 class FuncLang(Language):
@@ -137,3 +193,15 @@ class FuncLang(Language):
         output_stream.write(": Functional language" + "\n" +
                             "typification = " + self.type + ", lazy computing support = " + self.lazy +
                             ", year = " + self.year + "\n")
+
+    def MultiMethod(self, obj2, output_stream):
+        obj2.MMFunc(output_stream)
+
+    def MMProc(self, output_stream):
+        output_stream.write("\nProc and FUNC\n")
+
+    def MMOop(self, output_stream):
+        output_stream.write("\nOOP and FUNC\n")
+
+    def MMFunc(self, output_stream):
+        output_stream.write("\nFUNC and FUNC\n")
