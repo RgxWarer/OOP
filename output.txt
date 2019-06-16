@@ -15,3 +15,5 @@ Number of elements = 3
 2. 
 
 3. Procedure language: abstract = yes, number of mentions = 12010, year = 1997, how old = 22
+
+List empty. Number of elements = 0 

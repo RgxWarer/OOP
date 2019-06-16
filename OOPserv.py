@@ -15,7 +15,7 @@ class Container:
         self.head = None
         self.length = 0
 
-    def GetByID(self, key):
+    def Get_By_ID(self, key):
         if self.head is not None:
             current = self.head
             for k in range(key):
@@ -74,7 +74,7 @@ class Container:
             output_file.close()
             return 0
 
-    def OutputFilter(self, file_name):
+    def Output_Filter(self, file_name):
 
         output_file = open(file_name, 'a')
         if self.length > 0:
@@ -95,10 +95,10 @@ class Container:
         lang = Language()
         for i in range(self.length - 1):
             for j in range(0, self.length - i - 1):
-                tmp_el = self.GetByID(j)
+                tmp_el = self.Get_By_ID(j)
                 tmp_min = None
-                if lang.Compare(tmp_el.value, self.GetByID(j + 1).value):
-                    tmp_min = self.GetByID(j + 1)
+                if lang.Compare(tmp_el.value, self.Get_By_ID(j + 1).value):
+                    tmp_min = self.Get_By_ID(j + 1)
                     tmp_el.prev.next = tmp_min
                     tmp_min.next.prev = tmp_el
                     tmp_el.next = tmp_min.next
@@ -124,12 +124,12 @@ class Language:
     def __init__(self):
         self.year = 0  # общее поле - год разработки
         self.mentions = 0  # общее поле - упоминания
-        self.OOP_txt = {0: "single",
+        self.oop_txt = {0: "single",
                         1: "multiply",
                         2: "interface"}
         self.bool_txt = {0: "no",
                          1: "yes"}
-        self.FUNC_txt = {0: "strong",
+        self.func_txt = {0: "strong",
                          1: "dynamic"}
 
     @abc.abstractmethod  # определим метод позже
@@ -142,22 +142,22 @@ class Language:
 
     def Input_Lang(self, lang_list, lang_type, lang_params):
         if lang_type == "1":  # ООП
-            tmp_OOP = OOPlang()
-            tmp_OOP.Input_Langs(lang_params, lang_list)
+            tmp_oop = OOPlang()
+            tmp_oop.Input_Langs(lang_params, lang_list)
         elif lang_type == "2":  # процедурный
-            tmp_Proc = ProcLang()
-            tmp_Proc.Input_Langs(lang_params, lang_list)
+            tmp_proc = ProcLang()
+            tmp_proc.Input_Langs(lang_params, lang_list)
         elif lang_type == "3":  # функциональный
-            tmp_Func = FuncLang()
-            tmp_Func.Input_Langs(lang_params, lang_list)
+            tmp_func = FuncLang()
+            tmp_func.Input_Langs(lang_params, lang_list)
         else:
             print("Verify that the input is correct.")
 
     def How_Year(self):
         return datetime.datetime.now().year - int(self.year)
 
-    def Compare(self, Arg1, Arg2):
-        if Arg1.How_Year() > Arg2.How_Year():
+    def Compare(self, arg1, arg2):
+        if arg1.How_Year() > arg2.How_Year():
             return 1
         else:
             return 0
@@ -179,7 +179,7 @@ class OOPlang(Language):
         try:
             self.inher, self.mentions, self.year = line
             try:
-                temp1 = self.OOP_txt[int(self.inher)]
+                temp1 = self.oop_txt[int(self.inher)]
                 temp2 = int(self.mentions)
                 temp3 = int(self.year)
 
@@ -190,7 +190,7 @@ class OOPlang(Language):
             print("Verify that the number of parameters is correct.")
 
     def Output_Lang(self, output_stream):
-        output_stream.write(". OOP language: " + "inheritance = " + self.OOP_txt[int(self.inher)] + ", number of mentions = " +
+        output_stream.write(". OOP language: " + "inheritance = " + self.oop_txt[int(self.inher)] + ", number of mentions = " +
                             self.mentions + ", year = " + self.year + ", how old = " + str(self.How_Year()) + "\n")
 
 
@@ -243,7 +243,7 @@ class FuncLang(Language):
         try:
             self.type, self.lazy, self.mentions, self.year = line
             try:
-                temp1 = self.FUNC_txt[int(self.type)]
+                temp1 = self.func_txt[int(self.type)]
                 temp2 = self.bool_txt[int(self.lazy)]
                 temp2 = int(self.mentions)
                 temp2 = int(self.year)
@@ -254,7 +254,7 @@ class FuncLang(Language):
             print("Verify that the number of parameters is correct.")
 
     def Output_Lang(self, output_stream):
-        output_stream.write(". Functional language: " + "typification = " + self.FUNC_txt[int(self.type)] +
+        output_stream.write(". Functional language: " + "typification = " + self.func_txt[int(self.type)] +
                             ", lazy computing support = " + self.bool_txt[int(self.lazy)] + ", number of mentions = " + self.mentions
                             + ", year = " + self.year + ", how old = " + str(self.How_Year()) + "\n")
 

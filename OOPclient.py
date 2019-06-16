@@ -3,7 +3,7 @@ from OOPserv import Container
 
 
 class Main:
-    def start(self):
+    def Start(self):
         if len(sys.argv) != 3:
             return print("You have not entered necessary arguments.")
 
@@ -16,12 +16,12 @@ class Main:
             if c.Output(output_name) != 0:
                 c.Sort()
                 c.Output(output_name)
-                c.OutputFilter(output_name)
+                c.Output_Filter(output_name)
                 c.Clear(output_name)
 
 
 if __name__ == '__main__':
     print("START")
     m = Main()
-    m.start()
+    m.Start()
     print("STOP")

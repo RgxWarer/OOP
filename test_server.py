@@ -48,14 +48,14 @@ class TestServer(TestCase):
         self.assertTrue(1)
 
     def test_GetByID(self):
-        self.assertTrue(self.c.GetByID(1).value == self.prc and self.c.GetByID(0).value == self.oop and self.c.GetByID(2).value == self.fnc)
+        self.assertTrue(self.c.Get_By_ID(1).value == self.prc and self.c.Get_By_ID(0).value == self.oop and self.c.Get_By_ID(2).value == self.fnc)
 
     def test_Output(self):
         self.c.Clear_File("output.txt")
         self.c.Output("output.txt")
         self.c.Sort()
         self.c.Output("output.txt")
-        self.c.OutputFilter("output.txt")
+        self.c.Output_Filter("output.txt")
         self.assertTrue(filecmp.cmp("output.txt", "outputG.txt"))
 
     def test_Sort(self):
